@@ -19,7 +19,17 @@ vm.run(['MOV','ax','0xffff','ADD','ax','0xffff'],0)
 - MOV REG VALUE
 - ADD REG REG
 - ADD REG VALUE
+- ADC REG REG
+- ADC REG VALUE
+- SUB REG REG
+- SUB REG VALUE
+- CMP REG REG
+- CMP REG VALUE
+- CMP VALUE VALUE
+- INC REG
+- DEC REG
 
 ## Specification
 - 4 16-bit Register (ax, bx, cx, dx)
-- cf
+- Carry Flag
+- Zerro Flag
