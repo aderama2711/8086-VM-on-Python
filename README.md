@@ -14,7 +14,7 @@ vm.run(['MOV','ax','0xffff','ADD','ax','0xffff'],0)
 ![alt text](https://github.com/aderama2711/8086-VM-on-Python/blob/main/output.png)
 
 ## Implemented Opcode
-MOV REG VALUE
-ADD REG REG
-ADD REG VALUE
+- MOV REG VALUE
+- ADD REG REG
+- ADD REG VALUE
 
