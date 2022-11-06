@@ -148,6 +148,8 @@ class i8086():
 					op2 = self.code[self.ip] # get 2nd operand
 					self.ip += 1
 					
+					print(op1,op2)
+					
 					if op1 in self.reg_list: # if the destination is register
 						n1 = self.reg[op1]
 					else: # else = value
@@ -159,8 +161,10 @@ class i8086():
 						n2 = op2
 						
 					result = hex(int(n1, 16) - int(n2, 16))[2:] # sub 
-						
-					if result == 0:
+					
+					print(result)
+					
+					if int(result) == 0:
 						self.zf = 1
 					
 					trace = 3
@@ -175,7 +179,11 @@ class i8086():
 						print('wrong operand 1 (must register)')
 						break
 						
-					result = hex(int(n1, 16) + int(1, 16))[2:] # increment 
+					result = hex(int(n1, 16) + int('1', 16))[2:] # increment 
+					
+					if len(result) <= 4: # if result less or same than 4 byte / 16 bit
+							result = '0'*(4-len(result)) + result # append 0
+					
 					self.reg[op1] = result # save new result
 					
 					trace = 2
@@ -190,7 +198,11 @@ class i8086():
 						print('wrong operand 1 (must register)')
 						break
 						
-					result = hex(int(n1, 16) - int(1, 16))[2:] # decrement 
+					result = hex(int(n1, 16) - int('1', 16))[2:] # decrement 
+					
+					if len(result) <= 4: # if result less or same than 4 byte / 16 bit
+							result = '0'*(4-len(result)) + result # append 0
+					
 					self.reg[op1] = result # save new result
 					
 					trace = 2
@@ -199,9 +211,11 @@ class i8086():
 			if self.trace:
 				print('='*10)
 				print(self.code[self.ip-trace:self.ip]) # print opcode and operand depends on trace value
+				print('\nzf\tcf')
+				print(str(self.zf)+'\t'+str(self.cf)+'\n')
 				for reg in self.reg: # print all register
 					print(reg,':',self.reg[reg])
-						
+				
 					
 					
 					
