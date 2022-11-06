@@ -2,8 +2,10 @@
 Intel 8086 'Virtual Machine' using Python
 
 ## Class and Method
+```
 __init__(self, trace=False)
 run(self, code, ip)
+```
 
 ## Example
 ```
@@ -18,3 +20,6 @@ vm.run(['MOV','ax','0xffff','ADD','ax','0xffff'],0)
 - ADD REG REG
 - ADD REG VALUE
 
+## Specification
+- 4 16-bit Register (ax, bx, cx, dx)
+- cf
