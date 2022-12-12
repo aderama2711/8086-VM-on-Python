@@ -1,0 +1,2 @@
+MOV ax 0xffff
+ADD ax 0xffff

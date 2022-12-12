@@ -53,10 +53,8 @@ class i8086():
 					if len(val) > 4: # if input more than 4 byte / 16 bit
 						print('Register overflow')
 						break
-					if len(val) <= 4: # if input less or same than 4 byte / 16 bit
-						val = '0'*(4-len(val)) + val # append 0
 						
-					self.reg[reg] = val
+					self.reg[reg] = val.zfill(4)
 					
 					trace = 3
 				
@@ -80,10 +78,7 @@ class i8086():
 					if op1 in self.reg_list: # if the destination is register
 						result = hex(int(n1, 16) + int(n2, 16))[2:] # add 
 						
-						if len(result) <= 4: # if result less or same than 4 byte / 16 bit
-							result = '0'*(4-len(result)) + result # append 0
-						
-						self.reg[op1] = result[-4:]
+						self.reg[op1] = result[-4:].zfill(4)
 					
 					trace = 3
 					
@@ -106,13 +101,12 @@ class i8086():
 					if op1 in self.reg_list: # if the destination is register
 						result = hex(int(n1, 16) + int(n2, 16))[2:] # add 
 						
-						if len(result) <= 4: # if result less or same than 4 byte / 16 bit
-							result = '0'*(4-len(result)) + result # append 0
-						
-						self.reg[op1] = result[-4:]
+						self.reg[op1] = result[-4:].zfill(4)
 						
 						if len(result) > 4: # if length greater than 4 (Carry)
 							self.cf = 1
+						else:
+							self.zf = 0
 					
 					trace = 3
 				
@@ -135,10 +129,7 @@ class i8086():
 					if op1 in self.reg_list: # if the destination is register
 						result = hex(int(n1, 16) - int(n2, 16))[2:] # sub 
 						
-						if len(result) <= 4: # if result less or same than 4 byte / 16 bit
-							result = '0'*(4-len(result)) + result # append 0
-						
-						self.reg[op1] = result[-4:]
+						self.reg[op1] = result[-4:].zfill(4)
 					
 					trace = 3
 					
@@ -162,10 +153,10 @@ class i8086():
 						
 					result = hex(int(n1, 16) - int(n2, 16))[2:] # sub 
 					
-					print(result)
-					
-					if int(result) == 0:
+					if result == '0':
 						self.zf = 1
+					else:
+						self.zf = 0
 					
 					trace = 3
 				
@@ -180,11 +171,11 @@ class i8086():
 						break
 						
 					result = hex(int(n1, 16) + int('1', 16))[2:] # increment 
-					
-					if len(result) <= 4: # if result less or same than 4 byte / 16 bit
-							result = '0'*(4-len(result)) + result # append 0
-					
-					self.reg[op1] = result # save new result
+
+					if len(result) > 4:
+						result = hex(int('0', 16))[2:]
+
+					self.reg[op1] = result.zfill(4) # save new result
 					
 					trace = 2
 					
@@ -200,10 +191,10 @@ class i8086():
 						
 					result = hex(int(n1, 16) - int('1', 16))[2:] # decrement 
 					
-					if len(result) <= 4: # if result less or same than 4 byte / 16 bit
-							result = '0'*(4-len(result)) + result # append 0
+					if result == 'x1':
+						result = hex(int('ffff', 16))[2:]
 					
-					self.reg[op1] = result # save new result
+					self.reg[op1] = result.zfill(4) # save new result
 					
 					trace = 2
 					

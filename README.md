@@ -8,12 +8,21 @@ run(self, code, ip)
 ```
 
 ## Example
+Method 1: custom program
+
 ```
 from i8086 import i8086
 vm = i8086(True) # turn trace on
 vm.run(['MOV','ax','0xffff','ADD','ax','0xffff'],0)
 ```
 ![alt text](https://github.com/aderama2711/8086-VM-on-Python/blob/main/output.png)
+
+Method 2: use i8086-run.py
+
+```
+python i8086-run.py -f hello.emu -t 1
+```
+![alt text](https://github.com/aderama2711/8086-VM-on-Python/blob/main/output1.png)
 
 ## Implemented Opcode
 - MOV REG VALUE
